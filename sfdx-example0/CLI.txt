@@ -1,0 +1,35 @@
+sfdx force:auth:web:login -d -a SFDXExample0
+
+sfdx config:set defaultdevhubusername=SFDXExample0 --global
+
+sfdx force:source:retrieve --manifest assets/package.xml --targetusername SFDXExample0 --wait 10
+
+sfdx force:data:tree:export --targetusername DevHub --outputdir assets/data --query "SELECT Id, Name, Email__c, Phone__c, Mobile_Phone__c, Title__c, Picture__c, ( SELECT Id, Address__c, Assessed_Value__c, Baths__c, Beds__c, Broker__c, City__c, Date_Agreement__c, Date_Closed__c, Date_Contracted__c, Date_Listed__c, Date_Pre_Market__c, Description__c, Location__Longitude__s, Location__Latitude__s, Picture__c, Price__c, Name, State__c, Status__c, Tags__c, Thumbnail__c, Title__c, Zip__c FROM Properties__r ) FROM Broker__c"
+
+sfdx force:org:create --setdefaultusername --setalias sfdx-scratchorg0 --definitionfile config/project-scratch-def.json
+
+sfdx force:source:retrieve -u SFDXExample0 -x assets/package.xml
+
+sfdx force:data:tree:export --targetusername SFDXExample0 --outputdir assets/data --query "SELECT (SELECT AccountNumber, AccountSource, AnnualRevenue, BillingAddress, BillingCity, BillingCountry, BillingGeocodeAccuracy, BillingLatitude, BillingLongitude, BillingPostalCode, BillingState, BillingStreet, CleanStatus, CreatedById, CreatedDate, DandbCompanyId, Description, DunsNumber, Fax, Id, Industry, IsDeleted, Jigsaw, JigsawCompanyId, LastActivityDate, LastModifiedById, LastModifiedDate, LastReferencedDate, LastViewedDate, MasterRecordId, NaicsCode, NaicsDesc, Name, NumberOfEmployees, OperatingHoursId, OwnerId, Ownership, ParentId, Phone, PhotoUrl, Rating, ShippingAddress, ShippingCity, ShippingCountry, ShippingGeocodeAccuracy, ShippingLatitude, ShippingLongitude, ShippingPostalCode, ShippingState, ShippingStreet, Sic, SicDesc, Site, SystemModstamp, TickerSymbol, Tradestyle, Type, Website, YearStarted FROM Account), AssistantName, AssistantPhone, Birthdate, CleanStatus, CreatedById, CreatedDate, Department, Description, Email, EmailBouncedDate, EmailBouncedReason, Fax, FirstName, HomePhone, Id, IndividualId, IsDeleted, IsEmailBounced, Jigsaw, JigsawContactId, LastActivityDate, LastCURequestDate, LastCUUpdateDate, LastModifiedById, LastModifiedDate, LastName, LastReferencedDate, LastViewedDate, LeadSource, MailingAddress, MailingCity, MailingCountry, MailingGeocodeAccuracy, MailingLatitude, MailingLongitude, MailingPostalCode, MailingState, MailingStreet, MasterRecordId, MobilePhone, Name, OtherAddress, OtherCity, OtherCountry, OtherGeocodeAccuracy, OtherLatitude, OtherLongitude, OtherPhone, OtherPostalCode, OtherState, OtherStreet, OwnerId, Phone, PhotoUrl, ReportsToId, Salutation, SystemModstamp, Title FROM Contact"
+
+
+
+
+SELECT (SELECT AccountNumber, AccountSource, AnnualRevenue, BillingAddress, BillingCity, BillingCountry, BillingGeocodeAccuracy, BillingLatitude, BillingLongitude, BillingPostalCode, BillingState, BillingStreet, CleanStatus, CreatedById, CreatedDate, DandbCompanyId, Description, DunsNumber, Fax, Id, Industry, IsDeleted, Jigsaw, JigsawCompanyId, LastActivityDate, LastModifiedById, LastModifiedDate, LastReferencedDate, LastViewedDate, MasterRecordId, NaicsCode, NaicsDesc, Name, NumberOfEmployees, OperatingHoursId, OwnerId, Ownership, ParentId, Phone, PhotoUrl, Rating, ShippingAddress, ShippingCity, ShippingCountry, ShippingGeocodeAccuracy, ShippingLatitude, ShippingLongitude, ShippingPostalCode, ShippingState, ShippingStreet, Sic, SicDesc, Site, SystemModstamp, TickerSymbol, Tradestyle, Type, Website, YearStarted
+  FROM Account), AssistantName, AssistantPhone, Birthdate, CleanStatus, CreatedById, CreatedDate, Department, Description, Email, EmailBouncedDate, EmailBouncedReason, Fax, FirstName, HomePhone, Id, IndividualId, IsDeleted, IsEmailBounced, Jigsaw, JigsawContactId, LastActivityDate, LastCURequestDate, LastCUUpdateDate, LastModifiedById, LastModifiedDate, LastName, LastReferencedDate, LastViewedDate, LeadSource, MailingAddress, MailingCity, MailingCountry, MailingGeocodeAccuracy, MailingLatitude, MailingLongitude, MailingPostalCode, MailingState, MailingStreet, MasterRecordId, MobilePhone, Name, OtherAddress, OtherCity, OtherCountry, OtherGeocodeAccuracy, OtherLatitude, OtherLongitude, OtherPhone, OtherPostalCode, OtherState, OtherStreet, OwnerId, Phone, PhotoUrl, ReportsToId, Salutation, SystemModstamp, Title
+  FROM Contact
+
+
+getAllContactsWithAccounts.soql
+
+sfdx force:data:tree:export -u SFDXExample0 -q scripts/soql/getAllAccounts.soql --outputdir assets/data
+sfdx force:data:tree:export -u SFDXExample0 -q scripts/soql/getAllContacts.soql --outputdir assets/data
+
+
+SELECT AccountNumber, AccountSource, AnnualRevenue, BillingAddress, BillingCity, BillingCountry, BillingGeocodeAccuracy, BillingLatitude, BillingLongitude, BillingPostalCode, BillingState, BillingStreet, CleanStatus, CreatedById, CreatedDate, DandbCompanyId, Description, DunsNumber, Fax, Id, Industry, IsDeleted, Jigsaw, JigsawCompanyId, LastActivityDate, LastModifiedById, LastModifiedDate, LastReferencedDate, LastViewedDate, MasterRecordId, NaicsCode, NaicsDesc, Name, NumberOfEmployees, OperatingHoursId, OwnerId, Ownership, ParentId, Phone, PhotoUrl, Rating, ShippingAddress, ShippingCity, ShippingCountry, ShippingGeocodeAccuracy, ShippingLatitude, ShippingLongitude, ShippingPostalCode, ShippingState, ShippingStreet, Sic, SicDesc, Site, SystemModstamp, TickerSymbol, Tradestyle, Type, Website, YearStarted
+  FROM Account
+
+SELECT AccountId, AssistantName, AssistantPhone, Birthdate, CleanStatus, CreatedById, CreatedDate, Department, Description, Email, EmailBouncedDate, EmailBouncedReason, Fax, FirstName, HomePhone, Id, IndividualId, IsDeleted, IsEmailBounced, Jigsaw, JigsawContactId, LastActivityDate, LastCURequestDate, LastCUUpdateDate, LastModifiedById, LastModifiedDate, LastName, LastReferencedDate, LastViewedDate, LeadSource, MailingAddress, MailingCity, MailingCountry, MailingGeocodeAccuracy, MailingLatitude, MailingLongitude, MailingPostalCode, MailingState, MailingStreet, MasterRecordId, MobilePhone, Name, OtherAddress, OtherCity, OtherCountry, OtherGeocodeAccuracy, OtherLatitude, OtherLongitude, OtherPhone, OtherPostalCode, OtherState, OtherStreet, OwnerId, Phone, PhotoUrl, ReportsToId, Salutation, SystemModstamp, Title
+  FROM Contact
+
+sfdx force:org:delete

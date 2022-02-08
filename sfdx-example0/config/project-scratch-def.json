@@ -1,5 +1,5 @@
 {
-  "orgName": "Demo company",
+  "orgName": "Scratch org for SFDX Example 0",
   "edition": "Developer",
   "features": ["EnableSetPasswordInApi"],
   "settings": {
