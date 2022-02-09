@@ -8,5 +8,6 @@
   "name": "sfdx-example0",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "53.0"
+  "sourceApiVersion": "53.0",
+  "oauthLocalPort" : "1919"
 }

@@ -33,3 +33,24 @@ SELECT AccountId, AssistantName, AssistantPhone, Birthdate, CleanStatus, Created
   FROM Contact
 
 sfdx force:org:delete
+
+$ sfdx force:org:create -f config/project-scratch-def.json -a ScratchOrg0
+sfdx force:source:push
+
+sfdx force:data:tree:import -u ScratchOrg0 -f assets/data/Account.json
+sfdx force:data:tree:import -u ScratchOrg0 -f assets/data/Account.json
+
+
+Accounts (invalid fields for import)
+CreatedDate
+LastModifiedDate
+SystemModstamp
+IsDeleted
+BillingAddress
+ShippingAddress --> Shipping.Street
+PhotoUrl
+
+Contacts (invalid fields for import)
+LastModifiedDate, IsDeleted, IsEmailBounced, Name, SystemModstamp, CreatedDate, PhotoUrl, MailingAddress, OtherAddress.
+
+sfdx force:org:open
